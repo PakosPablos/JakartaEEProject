@@ -1,77 +1,67 @@
 package movie.web;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.view.ViewScoped;      // ✅ correct ViewScoped import
-import jakarta.inject.Inject;
+import jakarta.ejb.EJB;
+import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
+import movie.entity.Movie;
+import movie.entity.Person;
+import movie.service.MovieService;
 
 import java.io.Serializable;
 import java.util.List;
-
-import movie.entity.Movie;
-import movie.entity.Person;
-import movie.service.MovieService;         // ✅ note: movie.service (all lowercase)
 
 @Named("movieBean")
 @ViewScoped
 public class MovieBean implements Serializable {
 
-    @Inject
+    private static final long serialVersionUID = 1L;
+
+    @EJB
     private MovieService movieService;
 
-    // ---- Add movie form ----
-    private Movie newMovie = new Movie();
-    private Long selectedDirectorId;          // chosen director from dropdown
+    // --- Add movie ---
 
-    // ---- Search criteria ----
+    private Movie newMovie = new Movie();
+    private Long selectedDirectorId;
+    private List<Person> allPeople;
+    private List<Movie> allMovies;
+
+    // --- Search movie ---
+
     private String searchTitle;
     private Integer searchReleaseYear;
     private String searchGenre;
     private String searchDirectorName;
-    private String searchActorName;
-
-    // ---- Search results ----
+    private String searchActorName;    // currently not used in query
     private List<Movie> searchResults;
-
-    // ---- Dropdown data ----
-    private List<Person> allPeople;           // directors/actors from person table
 
     @PostConstruct
     public void init() {
-        // Load people for the director dropdown
-        allPeople = movieService.findAllPersons();
+        reloadReferenceData();
     }
 
-    // ========= Actions =========
+    private void reloadReferenceData() {
+        allPeople = movieService.findAllPersons();
+        allMovies = movieService.findAllMovies();
+    }
 
-    // Add a new movie
+    // ----- Actions for addMovie page -----
+
     public String saveMovie() {
-        if (selectedDirectorId != null) {
-            Person director = movieService.findPersonById(selectedDirectorId);
-            newMovie.setDirector(director);
-        }
+        movieService.addMovie(newMovie, selectedDirectorId);
+        resetNewMovie();
+        reloadReferenceData();
+        return null; // stay on same page
+    }
 
-        movieService.addMovie(newMovie);
-
-        // Reset form
+    public void resetNewMovie() {
         newMovie = new Movie();
         selectedDirectorId = null;
-
-        // optional: refresh results if user already searched
-        search();
-
-        return null;   // stay on same page
     }
 
-    // Delete a movie
-    public void removeMovie(Movie movie) {
-        if (movie != null && movie.getId() != null) {
-            movieService.deleteMovie(movie.getId());
-            search(); // refresh table
-        }
-    }
+    // ----- Actions for searchMovie page -----
 
-    // Search using any combination of criteria
     public void search() {
         searchResults = movieService.searchMovies(
                 searchTitle,
@@ -82,7 +72,16 @@ public class MovieBean implements Serializable {
         );
     }
 
-    // ========= Getters & setters =========
+    public void resetSearch() {
+        searchTitle = null;
+        searchReleaseYear = null;
+        searchGenre = null;
+        searchDirectorName = null;
+        searchActorName = null;
+        searchResults = null;
+    }
+
+    // ----- Getters / setters -----
 
     public Movie getNewMovie() {
         return newMovie;
@@ -98,6 +97,14 @@ public class MovieBean implements Serializable {
 
     public void setSelectedDirectorId(Long selectedDirectorId) {
         this.selectedDirectorId = selectedDirectorId;
+    }
+
+    public List<Person> getAllPeople() {
+        return allPeople;
+    }
+
+    public List<Movie> getAllMovies() {
+        return allMovies;
     }
 
     public String getSearchTitle() {
@@ -146,13 +153,5 @@ public class MovieBean implements Serializable {
 
     public void setSearchResults(List<Movie> searchResults) {
         this.searchResults = searchResults;
-    }
-
-    public List<Person> getAllPeople() {
-        return allPeople;
-    }
-
-    public void setAllPeople(List<Person> allPeople) {
-        this.allPeople = allPeople;
     }
 }
