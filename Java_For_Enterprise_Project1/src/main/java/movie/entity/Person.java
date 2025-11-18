@@ -1,4 +1,5 @@
 package movie.entity;
+
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -8,31 +9,50 @@ public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  // person.id
+    private Long id;
 
-    @Column(name = "full_name", nullable = false, length = 255)
-    private String fullName;
+    // Maps to column `Surname`
+    @Column(name = "Surname", nullable = false, length = 255)
+    private String surname;
+
+    // Maps to column `Name`
+    @Column(name = "Name", nullable = false, length = 255)
+    private String name;
 
     // Movies this person directed
     @OneToMany(mappedBy = "director")
     private List<Movie> directedMovies;
 
-    // Acting roles (join rows) for this person
+    // Acting roles for this person
     @OneToMany(mappedBy = "person")
     private List<MovieActor> actingRoles;
 
-    // --- Getters & setters ---
+    // -------- Convenience property for JSF label --------
+    // This is NOT mapped to a DB column, it's just computed.
+    public String getFullName() {
+        return surname + " " + name;
+    }
+
+    // -------- Getters & setters --------
 
     public Long getId() {
         return id;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Movie> getDirectedMovies() {

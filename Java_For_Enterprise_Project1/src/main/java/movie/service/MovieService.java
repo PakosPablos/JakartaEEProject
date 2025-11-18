@@ -12,8 +12,9 @@ import movie.entity.Person;
 @Stateless
 public class MovieService {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "moviesPU")
     private EntityManager em;
+
 
     // ---------- Movie operations ----------
 
@@ -85,12 +86,13 @@ public class MovieService {
     // ---------- Person operations ----------
 
     // List all persons (for director dropdown etc.)
-    public List<Person> findAllPersons() {
-        return em.createQuery(
-                "SELECT p FROM Person p ORDER BY p.fullName",
-                Person.class)
-            .getResultList();
-    }
+   public List<Person> findAllPersons() {
+    return em.createQuery(
+            "SELECT p FROM Person p ORDER BY p.surname, p.name",
+            Person.class)
+        .getResultList();
+}
+
 
     // Find one person by id
     public Person findPersonById(Long id) {
