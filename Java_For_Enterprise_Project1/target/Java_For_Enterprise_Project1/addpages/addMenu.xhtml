@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html">
+
+<h:head>
+    <title>Add – Movie Manager</title>
+    <h:outputStylesheet library="css" name="app.css" />
+</h:head>
+
+<h:body>
+    <div class="top-link">
+        <h:link outcome="index" value="&larr; Back to main"/>
+    </div>
+
+    <div class="full-screen">
+        <div class="box">
+            <h1>Welcome to the add section</h1>
+            <div class="subtitle">
+                What would you like to add?
+            </div>
+
+            <h:form>
+                <h:commandButton styleClass="btn"
+                                 value="Actor"
+                                 action="addActor"/>
+                <h:commandButton styleClass="btn"
+                                 value="Director"
+                                 action="addDirector"/>
+                <h:commandButton styleClass="btn"
+                                 value="Movie"
+                                 action="addMovie"/>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

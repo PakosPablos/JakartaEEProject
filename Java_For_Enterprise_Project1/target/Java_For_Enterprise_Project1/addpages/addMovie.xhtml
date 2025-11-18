@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>Add movie</title>
+    <h:outputStylesheet library="css" name="app.css" />
+</h:head>
+
+<h:body>
+    <div class="top-link">
+        <h:link outcome="addMenu" value="&larr; Back to add menu"/>
+    </div>
+
+    <div class="page-wrapper">
+        <h2 class="page-title">Add a movie</h2>
+        <div class="page-subtitle">
+            Fill in the fields on the left; the current movie list appears on the right.
+        </div>
+
+        <h:form>
+            <div class="content-row">
+
+                <!-- Left: input -->
+                <div class="panel panel-left">
+                    <div class="panel-title">Input</div>
+
+                    <div class="form-grid">
+                        <h:outputLabel for="title" value="Title:" />
+                        <h:inputText id="title"
+                                     value="#{movieBean.newMovie.title}"
+                                     required="true"/>
+
+                        <h:outputLabel for="year" value="Year:" />
+                        <h:inputText id="year"
+                                     value="#{movieBean.newMovie.releaseYear}"/>
+
+                        <h:outputLabel for="genre" value="Genre:" />
+                        <h:inputText id="genre"
+                                     value="#{movieBean.newMovie.genre}"/>
+
+                        <h:outputLabel for="runtime" value="Runtime (min):" />
+                        <h:inputText id="runtime"
+                                     value="#{movieBean.newMovie.runtimeMinutes}"/>
+
+                        <h:outputLabel for="director" value="Director:" />
+                        <h:selectOneMenu id="director"
+                                         value="#{movieBean.selectedDirectorId}">
+                            <f:selectItem itemLabel="-- Select director --"
+                                          itemValue="#{null}"
+                                          noSelectionOption="true" />
+                            <f:selectItems value="#{movieBean.allPeople}"
+                                           var="p"
+                                           itemValue="#{p.id}"
+                                           itemLabel="#{p.fullName}" />
+                        </h:selectOneMenu>
+                    </div>
+
+                    <div class="btn-bar">
+                        <h:commandButton styleClass="btn-small"
+                                         value="Save movie"
+                                         action="#{movieBean.saveMovie}"/>
+                        <h:commandButton styleClass="btn-small"
+                                         value="Clear"
+                                         action="#{movieBean.resetNewMovie}"/>
+                    </div>
+                </div>
+
+                <!-- Right: list -->
+                <div class="panel panel-right">
+                    <div class="panel-title">Movie list</div>
+
+                    <h:dataTable value="#{movieBean.allMovies}"
+                                 var="m"
+                                 rendered="#{not empty movieBean.allMovies}">
+                        <h:column>
+                            <f:facet name="header">Title</f:facet>
+                            #{m.title}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Year</f:facet>
+                            #{m.releaseYear}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Genre</f:facet>
+                            #{m.genre}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Director</f:facet>
+                            #{m.director.fullName}
+                        </h:column>
+                    </h:dataTable>
+
+                    <h:panelGroup rendered="#{empty movieBean.allMovies}">
+                        No movies in the database yet.
+                    </h:panelGroup>
+                </div>
+            </div>
+        </h:form>
+    </div>
+</h:body>
+</html>
