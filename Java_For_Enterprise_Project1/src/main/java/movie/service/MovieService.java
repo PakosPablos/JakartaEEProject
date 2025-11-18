@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import movie.entity.Movie;
 import movie.entity.Person;
+import movie.entity.MovieActor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,29 +109,27 @@ public class MovieService {
         return query.getResultList();
     }
 
-        // ---- Actor assignments (MovieActor) ----
-
-    public void addActorToMovie(Long movieId, Long personId, Integer billingOrder) {
-        if (movieId == null || personId == null) {
-            throw new IllegalArgumentException("Movie and person must be selected");
-        }
-
-        Movie movie = em.find(Movie.class, movieId);
-        Person person = em.find(Person.class, personId);
-
-        if (movie == null || person == null) {
-            throw new IllegalArgumentException("Invalid movie or person id");
-        }
-
-        movie.entity.MovieActor assignment = new movie.entity.MovieActor();
-        assignment.setMovie(movie);
-        assignment.setPerson(person);
-        assignment.setBillingOrder(billingOrder);
-
-        em.persist(assignment);
+  public void addActorToMovie(Long movieId, Long personId, Integer billingOrder) {
+    if (movieId == null || personId == null) {
+        throw new IllegalArgumentException("Movie and person must be selected");
     }
 
-    public List<MovieActor> findAllActorAssignments() {
+    Movie movie = em.find(Movie.class, movieId);
+    Person person = em.find(Person.class, personId);
+
+    if (movie == null || person == null) {
+        throw new IllegalArgumentException("Invalid movie or person id");
+    }
+
+    MovieActor assignment = new MovieActor();
+    assignment.setMovie(movie);
+    assignment.setPerson(person);
+    assignment.setBillingOrder(billingOrder);
+
+    em.persist(assignment);
+}
+
+public List<MovieActor> findAllActorAssignments() {
     return em.createQuery(
             "SELECT a FROM MovieActor a " +
             "JOIN FETCH a.movie " +
