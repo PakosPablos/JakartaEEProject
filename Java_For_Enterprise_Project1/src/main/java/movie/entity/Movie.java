@@ -38,7 +38,7 @@ public class Movie {
 
     @ManyToOne(optional = false)
     @JoinColumn(
-        name = "director_id",
+        name = "directore_id",
         nullable = false,
         foreignKey = @ForeignKey(name = "movie_director")
     )
