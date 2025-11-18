@@ -4,7 +4,7 @@ In this file i will disclose some of my thinking in creating the solution
 for the JakartaEE Project
 
 
-# Databse
+# Database
 
 For the 3 database tables i chose to stay simple and created movie, person and movie_actor
 
@@ -40,6 +40,17 @@ Here below you can see a photo of a rought uml graph of the tables and there int
 
 The idea behind the movie_actor table was that every person with a direct conection to a movie would be a director, and every person listed
 in the movie_actor table would be classified as an actor.
+
+
+# General design idea and features
+
+The idea of the features is basically that you can manage a small movie database through a few JSF pages. On the main page you just choose if you want to add data or search data. In the “add” part you can first create people (surname and name), 
+then you can add movies where you pick one of those people as the director, and finally you can assign actors to movies by choosing a movie and a person and giving them a billing order. Each of those pages has the same layout: on the left you fill in a 
+small form, and on the right you see the current list from the database update when you save something, so you can see right away that it worked. In the search part you can search movies by different criteria (title, year, genre, director name, actor name), 
+and you also have simple searches that only show people who are directors or people who are actors, based on what is actually stored in the movie and movie_actor tables, not just everyone in person. 
+
+
+
 
 
 
