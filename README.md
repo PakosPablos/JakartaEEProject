@@ -50,7 +50,7 @@ small form, and on the right you see the current list from the database update w
 and you also have simple searches that only show people who are directors or people who are actors, based on what is actually stored in the movie and movie_actor tables, not just everyone in person. 
 
 
-#Disclosure of AI use
+# Disclosure of AI use
 
 During the development of this porject i have often used AI to help me with the debugging of the code and with error messages that i could not understand, however i havent copy pasted its suggestion. The reason being that i used
 a custom model which I told it to help me come to the answer myself and only if directly prompted, to never give me direct soluctions. I often used it to understand the core concepts better.
