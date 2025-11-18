@@ -43,13 +43,10 @@ public class Movie {
         foreignKey = @ForeignKey(name = "movie_director")
     )
     private Person director;
-
-    // Actors for this movie, via movie_actor table
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("billingOrder ASC")
     private List<MovieActor> cast;
 
-    // --- Getters & setters ---
 
     public Long getId() {
         return id;
