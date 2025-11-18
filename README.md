@@ -22,6 +22,13 @@ And i did the same with the person.id, if a person were to be deleted, its actor
 For the person table its kinda basic the idea behind it, it just holds the name and surname of that person, also the id is auto generate an increments auto maticaly by one if
 another person is added
 
+Lastly for the movie table i kept the same idea for the id, i also made it that the combination of the title and year should be unique to avoid any mixups and mistaken duplications.
+Also made it that every director_id needs to reference a person.id.
+
+
+Here below you can see a photo of the rought uml graph of the tables and there interactions.
+
+<img width="482" height="432" alt="image" src="https://github.com/user-attachments/assets/b94eccab-eec3-4dc7-96a9-ef101566854a" />
 
 
 
