@@ -1,9 +1,0 @@
-movie\service\PersonService.class
-movie\web\PersonBean.class
-movie\web\MovieBean.class
-movie\entity\MovieActor.class
-movie\entity\Movie.class
-movie\entity\Person.class
-movie\entity\MovieActorId.class
-movie\service\MovieService.class
-movie\web\ActorBean.class

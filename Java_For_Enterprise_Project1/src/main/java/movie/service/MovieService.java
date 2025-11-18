@@ -7,7 +7,7 @@ import jakarta.persistence.TypedQuery;
 import movie.entity.Movie;
 import movie.entity.Person;
 import movie.entity.MovieActor;
-
+import movie.entity.MovieActorId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,9 +102,12 @@ public class MovieService {
         throw new IllegalArgumentException("Invalid movie or person id");
     }
 
+    MovieActorId id = new MovieActorId(movieId, personId);
+
     MovieActor assignment = new MovieActor();
-    assignment.setMovie(movie);
-    assignment.setPerson(person);
+    assignment.setId(id);                 
+    assignment.setMovie(movie);           
+    assignment.setPerson(person);        
     assignment.setBillingOrder(billingOrder);
 
     em.persist(assignment);
