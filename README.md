@@ -1,7 +1,5 @@
 # JakartaEEProject
-
 For the 3 database tables i chose to stay simple and created movie, person and movie_actor
-
 The structures of each one looks roughtly like this
 
 For the the movie table:
