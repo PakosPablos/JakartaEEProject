@@ -1,16 +1,16 @@
 package movie.web;
 
 import jakarta.annotation.PostConstruct;
-import jakarta.enterprise.context.ViewScoped;
+import jakarta.faces.view.ViewScoped;      // ✅ correct ViewScoped import
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.io.Serializable;
 import java.util.List;
 
-import movie.Service.MovieService;
 import movie.entity.Movie;
 import movie.entity.Person;
+import movie.service.MovieService;         // ✅ note: movie.service (all lowercase)
 
 @Named("movieBean")
 @ViewScoped

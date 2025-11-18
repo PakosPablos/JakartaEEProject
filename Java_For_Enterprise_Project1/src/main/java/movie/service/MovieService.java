@@ -7,6 +7,7 @@ import jakarta.persistence.PersistenceContext;
 import java.util.List;
 
 import movie.entity.Movie;
+import movie.entity.Person;
 
 @Stateless
 public class MovieService {
@@ -14,12 +15,14 @@ public class MovieService {
     @PersistenceContext
     private EntityManager em;
 
-    // --- Add movie ---
+    // ---------- Movie operations ----------
+
+    // Add a new movie
     public void addMovie(Movie movie) {
         em.persist(movie);
     }
 
-    // --- Delete movie ---
+    // Delete movie by id
     public void deleteMovie(Long id) {
         Movie m = em.find(Movie.class, id);
         if (m != null) {
@@ -27,7 +30,7 @@ public class MovieService {
         }
     }
 
-    // --- Flexible search example (you can adjust later) ---
+    // Flexible search by multiple criteria
     public List<Movie> searchMovies(
             String title,
             Integer releaseYear,
@@ -77,5 +80,20 @@ public class MovieService {
         }
 
         return query.getResultList();
+    }
+
+    // ---------- Person operations ----------
+
+    // List all persons (for director dropdown etc.)
+    public List<Person> findAllPersons() {
+        return em.createQuery(
+                "SELECT p FROM Person p ORDER BY p.fullName",
+                Person.class)
+            .getResultList();
+    }
+
+    // Find one person by id
+    public Person findPersonById(Long id) {
+        return em.find(Person.class, id);
     }
 }

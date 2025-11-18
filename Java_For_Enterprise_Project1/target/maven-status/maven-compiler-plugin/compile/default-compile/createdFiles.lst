@@ -1,1 +1,6 @@
-com\example\HelloServlet.class
+movie\entity\Person.class
+movie\entity\MovieActorId.class
+movie\service\MovieService.class
+movie\web\MovieBean.class
+movie\entity\MovieActor.class
+movie\entity\Movie.class
