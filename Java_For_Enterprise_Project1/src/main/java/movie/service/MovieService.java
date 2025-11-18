@@ -130,14 +130,15 @@ public class MovieService {
         em.persist(assignment);
     }
 
-    public List<movie.entity.MovieActor> findAllActorAssignments() {
-        return em.createQuery(
-                "SELECT a FROM MovieActor a " +
-                "JOIN FETCH a.movie m " +
-                "JOIN FETCH a.person p " +
-                "ORDER BY m.title, a.billingOrder",
-                movie.entity.MovieActor.class)
-                 .getResultList();
-    }
+    public List<MovieActor> findAllActorAssignments() {
+    return em.createQuery(
+            "SELECT a FROM MovieActor a " +
+            "JOIN FETCH a.movie " +
+            "JOIN FETCH a.person " +
+            "ORDER BY a.movie.title, a.billingOrder",
+            MovieActor.class)
+            .getResultList();
+}
+
 
 }
