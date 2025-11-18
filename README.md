@@ -1,5 +1,8 @@
 # JakartaEEProject
 
+In this file i will disclose some of my thinking in creating the solution
+
+
 For the 3 database tables i chose to stay simple and created movie, person and movie_actor
 
 The structures of the the movie table looks like this:
@@ -26,9 +29,14 @@ Lastly for the movie table i kept the same idea for the id, i also made it that 
 Also made it that every director_id needs to reference a person.id.
 
 
-Here below you can see a photo of the rought uml graph of the tables and there interactions.
+Here below you can see a photo of a rought uml graph of the tables and there interactions.
 
 <img width="482" height="432" alt="image" src="https://github.com/user-attachments/assets/b94eccab-eec3-4dc7-96a9-ef101566854a" />
+
+
+
+The idea behind the movie_actor table was that every person with a direct conection to a movie would be a director, and every person listed
+in the movie_actor table would be classified as an actor.
 
 
 
