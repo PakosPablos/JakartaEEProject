@@ -48,9 +48,6 @@ public class ActorBean implements Serializable {
         assignments = movieService.findAllActorAssignments();
         return null;
     }
-
-    // Getters / setters
-
     public Long getSelectedMovieId() {
         return selectedMovieId;
     }

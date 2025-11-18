@@ -9,7 +9,7 @@ public class MovieActor {
     private MovieActorId id;
 
     @ManyToOne
-    @MapsId("movieId")   // uses movieId from embedded id
+    @MapsId("movieId") 
     @JoinColumn(
         name = "movie_id",
         foreignKey = @ForeignKey(name = "fk_movie_actor_movie")
@@ -17,7 +17,7 @@ public class MovieActor {
     private Movie movie;
 
     @ManyToOne
-    @MapsId("personId")  // uses personId from embedded id
+    @MapsId("personId") 
     @JoinColumn(
         name = "person_id",
         foreignKey = @ForeignKey(name = "fk_movie_actor_person")
@@ -26,9 +26,6 @@ public class MovieActor {
 
     @Column(name = "billing_order")
     private Integer billingOrder;
-
-    // --- Constructors ---
-
     public MovieActor() {}
 
     public MovieActor(Movie movie, Person person, Integer billingOrder) {
@@ -40,8 +37,6 @@ public class MovieActor {
             person != null ? person.getId() : null
         );
     }
-
-    // --- Getters & setters ---
 
     public MovieActorId getId() {
         return id;

@@ -19,21 +19,15 @@ public class MovieBean implements Serializable {
 
     @EJB
     private MovieService movieService;
-
-    // --- Add movie ---
-
     private Movie newMovie = new Movie();
     private Long selectedDirectorId;
     private List<Person> allPeople;
     private List<Movie> allMovies;
-
-    // --- Search movie ---
-
     private String searchTitle;
     private Integer searchReleaseYear;
     private String searchGenre;
     private String searchDirectorName;
-    private String searchActorName;    // currently not used in query
+    private String searchActorName;   
     private List<Movie> searchResults;
 
     @PostConstruct
@@ -46,22 +40,17 @@ public class MovieBean implements Serializable {
         allMovies = movieService.findAllMovies();
     }
 
-    // ----- Actions for addMovie page -----
-
     public String saveMovie() {
         movieService.addMovie(newMovie, selectedDirectorId);
         resetNewMovie();
         reloadReferenceData();
-        return null; // stay on same page
+        return null; 
     }
 
     public void resetNewMovie() {
         newMovie = new Movie();
         selectedDirectorId = null;
     }
-
-    // ----- Actions for searchMovie page -----
-
     public void search() {
         searchResults = movieService.searchMovies(
                 searchTitle,
@@ -80,8 +69,6 @@ public class MovieBean implements Serializable {
         searchActorName = null;
         searchResults = null;
     }
-
-    // ----- Getters / setters -----
 
     public Movie getNewMovie() {
         return newMovie;

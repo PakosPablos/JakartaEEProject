@@ -16,7 +16,6 @@ public class PersonService {
     @PersistenceContext(unitName = "moviesPU")
     private EntityManager em;
 
-    // ---- Create / Update ----
 
     public void save(Person person) {
         if (person.getId() == null) {
@@ -26,9 +25,6 @@ public class PersonService {
         }
     }
 
-    // ---- Read ----
-
-    /** All persons (for dropdowns etc.) */
     public List<Person> findAll() {
         return em.createQuery(
                 "SELECT p FROM Person p ORDER BY p.surname, p.name",
@@ -36,7 +32,6 @@ public class PersonService {
                  .getResultList();
     }
 
-    /** Generic name search on all persons */
     public List<Person> searchByName(String namePattern) {
         if (namePattern == null || namePattern.isBlank()) {
             return findAll();
@@ -55,7 +50,6 @@ public class PersonService {
         return query.getResultList();
     }
 
-    // ---- Only real DIRECTORS (people referenced in Movie.director) ----
 
     public List<Person> searchDirectorsByName(String namePattern) {
         StringBuilder jpql = new StringBuilder(
@@ -80,7 +74,6 @@ public class PersonService {
         return query.getResultList();
     }
 
-    // ---- Only real ACTORS (people referenced in MovieActor) ----
 
     public List<Person> searchActorsByName(String namePattern) {
         StringBuilder jpql = new StringBuilder(

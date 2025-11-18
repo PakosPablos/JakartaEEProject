@@ -17,11 +17,6 @@ public class MovieService {
     @PersistenceContext(unitName = "moviesPU")
     private EntityManager em;
 
-    // ---- Create ----
-
-    /**
-     * Add a movie and (optionally) set its director from a Person id.
-     */
     public void addMovie(Movie movie, Long directorPersonId) {
         if (directorPersonId != null) {
             Person director = em.find(Person.class, directorPersonId);
@@ -30,19 +25,10 @@ public class MovieService {
         em.persist(movie);
     }
 
-    /**
-     * Old-style method kept for compatibility (in case something else still calls it).
-     * It just persists the movie as-is.
-     */
     public void addMovie(Movie movie) {
         em.persist(movie);
     }
 
-    // ---- Read: lists ----
-
-    /**
-     * Return all movies ordered by title.
-     */
     public List<Movie> findAllMovies() {
         return em.createQuery(
                 "SELECT m FROM Movie m ORDER BY m.title",
@@ -50,9 +36,7 @@ public class MovieService {
                  .getResultList();
     }
 
-    /**
-     * Return all persons ordered by surname + name.
-     */
+
     public List<Person> findAllPersons() {
         return em.createQuery(
                 "SELECT p FROM Person p ORDER BY p.surname, p.name",
@@ -60,9 +44,7 @@ public class MovieService {
                  .getResultList();
     }
 
-    // ---- Search movies ----
-    // title / year / genre / directorName are used.
-    // actorName is accepted but not yet used (extension point).
+
 
     public List<Movie> searchMovies(String title,
                                     Integer releaseYear,
@@ -87,7 +69,6 @@ public class MovieService {
                         "OR LOWER(d.name) LIKE LOWER(:dname))");
         }
 
-        // (actorName could be used later with a join to MovieActor)
 
         TypedQuery<Movie> query =
                 em.createQuery(jpql.toString(), Movie.class);
