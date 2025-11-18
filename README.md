@@ -1,7 +1,10 @@
-# JakartaEEProject
+# Introduction
 
-In this file i will disclose some of my thinking in creating the solution
+In this file i will disclose some of my thinking in creating the solution 
+for the JakartaEE Project
 
+
+# Databse
 
 For the 3 database tables i chose to stay simple and created movie, person and movie_actor
 
