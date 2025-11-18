@@ -3,32 +3,32 @@
       xmlns:h="jakarta.faces.html">
 
 <h:head>
-    <title>Add – Movie Manager</title>
+    <title>Search – Movie Manager</title>
     <h:outputStylesheet library="css" name="app.css" />
 </h:head>
 
 <h:body>
     <div class="top-link">
-        <h:link outcome="/index" value="Back to main"/>
+        <h:link outcome="index" value="Back to main"/>
     </div>
 
     <div class="full-screen">
         <div class="box">
-            <h1>Welcome to the add section</h1>
+            <h1>Welcome to the search section</h1>
             <div class="subtitle">
-                What would you like to add?
+                What would you like to search?
             </div>
 
             <h:form>
                 <h:commandButton styleClass="btn"
                                  value="Actor"
-                                 action="addActor"/>
+                                 action="searchActor"/>
                 <h:commandButton styleClass="btn"
-                                 value="People"
-                                 action="addPerople"/>
+                                 value="Director"
+                                 action="searchDirector"/>
                 <h:commandButton styleClass="btn"
                                  value="Movie"
-                                 action="addMovie"/>
+                                 action="searchMovie"/>
             </h:form>
         </div>
     </div>
