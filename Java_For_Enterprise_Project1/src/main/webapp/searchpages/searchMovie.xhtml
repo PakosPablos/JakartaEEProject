@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>Search movies</title>
+    <h:outputStylesheet library="css" name="app.css" />
+</h:head>
+
+<h:body>
+    <div class="top-link">
+        <h:link outcome="searchMenu" value="&larr; Back to search menu"/>
+    </div>
+
+    <div class="page-wrapper">
+        <h2 class="page-title">Search movies</h2>
+        <div class="page-subtitle">
+            Enter criteria on the left; matching movies are shown on the right.
+        </div>
+
+        <h:form>
+            <div class="content-row">
+
+                <div class="panel panel-left">
+                    <div class="panel-title">Search criteria</div>
+
+                    <div class="form-grid">
+                        <h:outputLabel for="sTitle" value="Title contains:" />
+                        <h:inputText id="sTitle"
+                                     value="#{movieBean.searchTitle}"/>
+
+                        <h:outputLabel for="sYear" value="Release year:" />
+                        <h:inputText id="sYear"
+                                     value="#{movieBean.searchReleaseYear}"/>
+
+                        <h:outputLabel for="sGenre" value="Genre contains:" />
+                        <h:inputText id="sGenre"
+                                     value="#{movieBean.searchGenre}"/>
+
+                        <h:outputLabel for="sDir" value="Director name contains:" />
+                        <h:inputText id="sDir"
+                                     value="#{movieBean.searchDirectorName}"/>
+
+                        <h:outputLabel for="sActor" value="Actor name contains:" />
+                        <h:inputText id="sActor"
+                                     value="#{movieBean.searchActorName}"/>
+                    </div>
+
+                    <div class="btn-bar">
+                        <h:commandButton styleClass="btn-small"
+                                         value="Search"
+                                         action="#{movieBean.search}"/>
+                        <h:commandButton styleClass="btn-small"
+                                         value="Clear"
+                                         action="#{movieBean.resetSearch}"/>
+                    </div>
+                </div>
+
+                <div class="panel panel-right">
+                    <div class="panel-title">Results</div>
+
+                    <h:dataTable value="#{movieBean.searchResults}"
+                                 var="m"
+                                 rendered="#{not empty movieBean.searchResults}">
+                        <h:column>
+                            <f:facet name="header">Title</f:facet>
+                            #{m.title}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Year</f:facet>
+                            #{m.releaseYear}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Genre</f:facet>
+                            #{m.genre}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Director</f:facet>
+                            #{m.director.fullName}
+                        </h:column>
+                    </h:dataTable>
+
+                    <h:panelGroup rendered="#{empty movieBean.searchResults}">
+                        No results yet – enter criteria and click Search.
+                    </h:panelGroup>
+                </div>
+            </div>
+        </h:form>
+    </div>
+</h:body>
+</html>

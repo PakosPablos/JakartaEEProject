@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:f="jakarta.faces.core">
+
+<h:head>
+    <title>Add director</title>
+    <h:outputStylesheet library="css" name="app.css" />
+</h:head>
+
+<h:body>
+    <div class="top-link">
+        <h:link outcome="addMenu" value="&larr; Back to add menu"/>
+    </div>
+
+    <div class="page-wrapper">
+        <h2 class="page-title">Add a director</h2>
+        <div class="page-subtitle">
+            Create a new person entry that can be used as a director in movies.
+        </div>
+
+        <h:form>
+            <div class="content-row">
+
+                <div class="panel panel-left">
+                    <div class="panel-title">Input</div>
+
+                    <div class="form-grid">
+                        <h:outputLabel for="surname" value="Surname:" />
+                        <h:inputText id="surname"
+                                     value="#{personBean.newPerson.surname}"
+                                     required="true"/>
+
+                        <h:outputLabel for="name" value="Name:" />
+                        <h:inputText id="name"
+                                     value="#{personBean.newPerson.name}"
+                                     required="true"/>
+                    </div>
+
+                    <div class="btn-bar">
+                        <h:commandButton styleClass="btn-small"
+                                         value="Save director"
+                                         action="#{personBean.savePerson}"/>
+                        <h:commandButton styleClass="btn-small"
+                                         value="Clear"
+                                         action="#{personBean.resetNewPerson}"/>
+                    </div>
+                </div>
+
+                <div class="panel panel-right">
+                    <div class="panel-title">People list</div>
+
+                    <h:dataTable value="#{personBean.people}"
+                                 var="p"
+                                 rendered="#{not empty personBean.people}">
+                        <h:column>
+                            <f:facet name="header">ID</f:facet>
+                            #{p.id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Surname</f:facet>
+                            #{p.surname}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                            #{p.name}
+                        </h:column>
+                    </h:dataTable>
+
+                    <h:panelGroup rendered="#{empty personBean.people}">
+                        No persons stored yet.
+                    </h:panelGroup>
+                </div>
+
+            </div>
+        </h:form>
+    </div>
+</h:body>
+</html>

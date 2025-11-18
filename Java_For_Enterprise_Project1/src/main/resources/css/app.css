@@ -1,0 +1,148 @@
+/* -------- Global layout & typography -------- */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #a38f8f; /* same as your wireframe */
+    color: #222;
+}
+
+/* For the simple centered “menu” pages (index/searchMenu/addMenu) */
+.full-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box {
+    text-align: center;
+}
+
+h1 {
+    font-weight: normal;
+    margin-bottom: 40px;
+}
+
+.subtitle {
+    margin-bottom: 40px;
+    color: #f5f5f5;
+}
+
+/* Generic big buttons for menu screens */
+.btn {
+    background-color: #e2e2e2;
+    color: #333;
+    border: none;
+    padding: 10px 30px;
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    filter: brightness(0.95);
+}
+
+/* Back link in the top-left corner */
+.top-link {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+}
+
+.top-link a {
+    color: #f5f5f5;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* -------- Generic “input + list” layout -------- */
+
+.page-wrapper {
+    min-height: 100vh;
+    padding: 60px 40px 40px 40px;
+    box-sizing: border-box;
+}
+
+.page-title {
+    text-align: center;
+    color: #f5f5f5;
+    margin-bottom: 10px;
+}
+
+.page-subtitle {
+    text-align: center;
+    color: #f5f5f5;
+    margin-bottom: 30px;
+}
+
+.content-row {
+    display: flex;
+    gap: 30px;
+}
+
+/* Panels on left/right */
+.panel {
+    background-color: #e2e2e2;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.panel-left {
+    flex: 1;
+}
+
+.panel-right {
+    flex: 1.2;
+}
+
+.panel-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+/* Form grid inside left panel */
+.form-grid {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 10px 15px;
+    align-items: center;
+}
+
+/* Button bar under the form */
+.btn-bar {
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Smaller buttons inside forms */
+.btn-small {
+    background-color: #d6d6d6;
+    color: #333;
+    border: none;
+    padding: 8px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.btn-small:hover {
+    filter: brightness(0.95);
+}
+
+/* Tables on the right side */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th, td {
+    padding: 6px 8px;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+th {
+    font-weight: bold;
+}
+
