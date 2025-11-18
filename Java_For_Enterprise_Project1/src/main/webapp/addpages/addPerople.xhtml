@@ -4,19 +4,20 @@
       xmlns:f="jakarta.faces.core">
 
 <h:head>
-    <title>Add actor</title>
-    <h:outputStylesheet library="css" name="app.css" />
+    <title>Add people</title>
+    <link rel="stylesheet" type="text/css"
+          href="#{request.contextPath}/resources/css/app.css"/>
 </h:head>
 
 <h:body>
     <div class="top-link">
-        <h:link outcome="addMenu" value="&larr; Back to add menu"/>
+        <h:link outcome="addpages/addMenu" value="← Back to add menu"/>
     </div>
 
     <div class="page-wrapper">
-        <h2 class="page-title">Add an actor</h2>
+        <h2 class="page-title">Add people</h2>
         <div class="page-subtitle">
-            Create a new person entry that can be used as an actor in movies.
+            Create persons that can later be used as directors or actors.
         </div>
 
         <h:form>
@@ -39,7 +40,7 @@
 
                     <div class="btn-bar">
                         <h:commandButton styleClass="btn-small"
-                                         value="Save actor"
+                                         value="Save person"
                                          action="#{personBean.savePerson}"/>
                         <h:commandButton styleClass="btn-small"
                                          value="Clear"

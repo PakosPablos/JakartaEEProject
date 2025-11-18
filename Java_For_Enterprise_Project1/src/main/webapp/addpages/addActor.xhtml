@@ -4,19 +4,20 @@
       xmlns:f="jakarta.faces.core">
 
 <h:head>
-    <title>Add actor</title>
-    <h:outputStylesheet library="css" name="app.css" />
+    <title>Add actor to movie</title>
+    <link rel="stylesheet" type="text/css"
+          href="#{request.contextPath}/resources/css/app.css"/>
 </h:head>
 
 <h:body>
     <div class="top-link">
-        <h:link outcome="addMenu" value="Back to add menu"/>
+        <h:link outcome="addpages/addMenu" value="← Back to add menu"/>
     </div>
 
     <div class="page-wrapper">
-        <h2 class="page-title">Add an actor</h2>
+        <h2 class="page-title">Assign actor to movie</h2>
         <div class="page-subtitle">
-            Create a new person entry that can be used as an actor in movies.
+            Choose an existing person and movie to create an actor entry.
         </div>
 
         <h:form>
@@ -26,49 +27,68 @@
                     <div class="panel-title">Input</div>
 
                     <div class="form-grid">
-                        <h:outputLabel for="surname" value="Surname:" />
-                        <h:inputText id="surname"
-                                     value="#{personBean.newPerson.surname}"
-                                     required="true"/>
+                        <h:outputLabel for="movie" value="Movie:" />
+                        <h:selectOneMenu id="movie"
+                                         value="#{actorBean.selectedMovieId}">
+                            <f:selectItem itemLabel="-- Select movie --"
+                                          itemValue="#{null}"
+                                          noSelectionOption="true"/>
+                            <f:selectItems value="#{actorBean.movies}"
+                                           var="m"
+                                           itemValue="#{m.id}"
+                                           itemLabel="#{m.title} (#{m.releaseYear})"/>
+                        </h:selectOneMenu>
 
-                        <h:outputLabel for="name" value="Name:" />
-                        <h:inputText id="name"
-                                     value="#{personBean.newPerson.name}"
-                                     required="true"/>
+                        <h:outputLabel for="person" value="Person:" />
+                        <h:selectOneMenu id="person"
+                                         value="#{actorBean.selectedPersonId}">
+                            <f:selectItem itemLabel="-- Select person --"
+                                          itemValue="#{null}"
+                                          noSelectionOption="true"/>
+                            <f:selectItems value="#{actorBean.people}"
+                                           var="p"
+                                           itemValue="#{p.id}"
+                                           itemLabel="#{p.surname} #{p.name}"/>
+                        </h:selectOneMenu>
+
+                        <h:outputLabel for="billing" value="Billing order:" />
+                        <h:inputText id="billing"
+                                     value="#{actorBean.billingOrder}"/>
                     </div>
 
                     <div class="btn-bar">
                         <h:commandButton styleClass="btn-small"
-                                         value="Save actor"
-                                         action="#{personBean.savePerson}"/>
-                        <h:commandButton styleClass="btn-small"
-                                         value="Clear"
-                                         action="#{personBean.resetNewPerson}"/>
+                                         value="Add actor to movie"
+                                         action="#{actorBean.addActorToMovie}"/>
                     </div>
                 </div>
 
                 <div class="panel panel-right">
-                    <div class="panel-title">People list</div>
+                    <div class="panel-title">Current actors</div>
 
-                    <h:dataTable value="#{personBean.people}"
-                                 var="p"
-                                 rendered="#{not empty personBean.people}">
+                    <h:dataTable value="#{actorBean.assignments}"
+                                 var="a"
+                                 rendered="#{not empty actorBean.assignments}">
                         <h:column>
-                            <f:facet name="header">ID</f:facet>
-                            #{p.id}
+                            <f:facet name="header">Movie</f:facet>
+                            #{a.movie.title}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Surname</f:facet>
-                            #{p.surname}
+                            <f:facet name="header">Year</f:facet>
+                            #{a.movie.releaseYear}
                         </h:column>
                         <h:column>
-                            <f:facet name="header">Name</f:facet>
-                            #{p.name}
+                            <f:facet name="header">Actor</f:facet>
+                            #{a.person.surname} #{a.person.name}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Billing</f:facet>
+                            #{a.billingOrder}
                         </h:column>
                     </h:dataTable>
 
-                    <h:panelGroup rendered="#{empty personBean.people}">
-                        No persons stored yet.
+                    <h:panelGroup rendered="#{empty actorBean.assignments}">
+                        No actors have been assigned to movies yet.
                     </h:panelGroup>
                 </div>
 

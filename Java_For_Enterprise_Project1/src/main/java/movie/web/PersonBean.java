@@ -19,17 +19,17 @@ public class PersonBean implements Serializable {
     @EJB
     private PersonService personService;
 
-    // --- Add person (used by addActor/addDirector) ---
+    // --- Add person (used by "Add People" page) ---
 
     private Person newPerson = new Person();
     private List<Person> people;
 
-    // --- Search for actors ---
+    // --- Search for actors (only those in MovieActor) ---
 
     private String actorSearchName;
     private List<Person> actorResults;
 
-    // --- Search for directors ---
+    // --- Search for directors (only those in Movie.director) ---
 
     private String directorSearchName;
     private List<Person> directorResults;
@@ -55,7 +55,7 @@ public class PersonBean implements Serializable {
     // ----- Search actors -----
 
     public void searchActors() {
-        actorResults = personService.searchByName(actorSearchName);
+        actorResults = personService.searchActorsByName(actorSearchName);
     }
 
     public void resetActorSearch() {
@@ -66,7 +66,7 @@ public class PersonBean implements Serializable {
     // ----- Search directors -----
 
     public void searchDirectors() {
-        directorResults = personService.searchByName(directorSearchName);
+        directorResults = personService.searchDirectorsByName(directorSearchName);
     }
 
     public void resetDirectorSearch() {

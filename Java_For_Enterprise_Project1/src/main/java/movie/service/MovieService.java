@@ -107,4 +107,37 @@ public class MovieService {
 
         return query.getResultList();
     }
+
+        // ---- Actor assignments (MovieActor) ----
+
+    public void addActorToMovie(Long movieId, Long personId, Integer billingOrder) {
+        if (movieId == null || personId == null) {
+            throw new IllegalArgumentException("Movie and person must be selected");
+        }
+
+        Movie movie = em.find(Movie.class, movieId);
+        Person person = em.find(Person.class, personId);
+
+        if (movie == null || person == null) {
+            throw new IllegalArgumentException("Invalid movie or person id");
+        }
+
+        movie.entity.MovieActor assignment = new movie.entity.MovieActor();
+        assignment.setMovie(movie);
+        assignment.setPerson(person);
+        assignment.setBillingOrder(billingOrder);
+
+        em.persist(assignment);
+    }
+
+    public List<movie.entity.MovieActor> findAllActorAssignments() {
+        return em.createQuery(
+                "SELECT a FROM MovieActor a " +
+                "JOIN FETCH a.movie m " +
+                "JOIN FETCH a.person p " +
+                "ORDER BY m.title, a.billingOrder",
+                movie.entity.MovieActor.class)
+                 .getResultList();
+    }
+
 }
