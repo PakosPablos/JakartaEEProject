@@ -1,0 +1,6 @@
+movie\service\PersonService.class
+movie\entity\MovieActor.class
+movie\entity\Movie.class
+movie\entity\Person.class
+movie\entity\MovieActorId.class
+movie\service\MovieService.class
